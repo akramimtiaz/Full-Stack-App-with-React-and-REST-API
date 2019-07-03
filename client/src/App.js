@@ -1,10 +1,12 @@
 import React from 'react';
+import { AuthContext } from './components/context';
 
-function App() {
+const App = () => {
   return (
     <div>
+      Hello
     </div>
-  );
+  )
 }
 
 export default App;
