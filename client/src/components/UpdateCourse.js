@@ -7,3 +7,16 @@
  * to the "Course Detail" screen.
  * STATEFUL COMPONENT
  */
+import React, { Component } from 'react'
+
+class UpdateCourse extends Component {
+    render(){
+        return (
+            <div>
+
+            </div>
+        )
+    }
+}
+
+export default UpdateCourse

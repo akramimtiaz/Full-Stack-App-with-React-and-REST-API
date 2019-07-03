@@ -7,3 +7,16 @@
  * to the default route (i.e. the list of courses)
  * STATEFUL COMPONENT
  */
+import React, { Component } from 'react'
+
+class UserSignUp extends Component {
+    render(){
+        return (
+            <div>
+
+            </div>
+        )
+    }
+}
+
+export default UserSignUp
