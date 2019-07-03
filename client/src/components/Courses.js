@@ -7,15 +7,60 @@
  * */
 
 import React, { Component } from 'react'
+import axios from 'axios'
+//context
+import { AuthContext } from './context'
+//components
+import CourseItem from './misc/CourseItem'
 
 class Courses extends Component {
-    render(){
-        return (
-            <div>
+    constructor() {
+        super()
+        this.state = {
+            isLoading: false,
+            courses: [],
+        }
+    }
 
-            </div>
+    componentDidMount() {
+        this.setState({ isLoading: true })
+
+        axios({
+            url: 'http://localhost:5000/api/courses',
+            method: 'get',
+            responseType: 'json',
+        })
+        .then(response => 
+            this.setState({
+                isLoading: false,
+                courses: response.data
+            })
+        )
+        .catch(error => console.log(error))
+    }
+
+    render(){
+        const {isLoading, courses} = this.state
+        let courseItems
+
+        if(courses.length > 0){
+            courseItems = courses.map(course => <CourseItem key={course.id} title={course.title}/>)
+        }else{
+            courseItems = <h3>No Courses Exist</h3>
+        }   
+        
+        return (
+            <div className="wrapper">
+                <div className="courses">
+                    {
+                        isLoading ? 
+                            <h3>Loading</h3> : courseItems
+                    }
+                </div>
+            </div>   
         )
     }
 }
+Courses.contextType = AuthContext
 
 export default Courses

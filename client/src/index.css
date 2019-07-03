@@ -1,13 +1,33 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Work Sans';
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.wrapper {
+  width: 100%;
 }
+
+/*Courses Index*/
+.courses {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.courses--courseItem {
+  width: 30%;
+  margin-top: 20px;
+  padding-left: 30px;
+  display: inline-block;
+  border-radius: 10px;
+  background: #7c689b;
+}
+.courses--courseItem--heading {
+  color: #bdb3cd;
+}
+.courses--courseItem--title {
+  color: white;
+}
+

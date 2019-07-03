@@ -1,9 +1,11 @@
 import React from 'react';
+//components
+import Courses from './components/Courses'
 
 const App = () => {
   return (
     <div>
-      Hello
+      <Courses />
     </div>
   )
 }
