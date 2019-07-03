@@ -28,7 +28,7 @@ export class Provider extends Component {
             if(response.status === 200){ //sign-in successful
                 this.setState({
                     isAuth: true,
-                    authUser: response.data 
+                    authUser: {...response.data, password},
                 })
             }
         })

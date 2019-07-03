@@ -125,5 +125,31 @@ body {
 .courseDetail--right h3 {
   margin: 20px 0 20px 0;
 }
+/*Course Detail Action Bar*/
+.actionBar--wrapper {
+  width: 100%;
+  background:#f8feff;
+}
+.actionBar {
+  width: 85%;
+  margin: 0 auto;
+  padding: 20px 0 20px 0;
+  display: flex;
+  flex-direction: row;
+}
+.actionBar--button {
+  font-family: 'Work Sans';
+  padding: 15px;
+  margin-right: 15px;
+  border-radius: 7px;
+  background: #7c689b;
+  color: white;
+  cursor: pointer;
+}
+.actionBar--button:last-child {
+  background: white;
+  color: #7c689b;
+  border: 1px solid #7c689b;
+}
 
 
