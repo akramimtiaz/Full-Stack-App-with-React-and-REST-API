@@ -31,12 +31,14 @@ class Courses extends Component {
             method: 'get',
             responseType: 'json',
         })
-        .then(response => 
-            this.setState({
-                isLoading: false,
-                courses: response.data
-            })
-        )
+        .then(response => {
+            if(response.status === 200){
+                this.setState({
+                    isLoading: false,
+                    courses: response.data
+                })
+            }
+        })
         .catch(error => console.log(error))
     }
 

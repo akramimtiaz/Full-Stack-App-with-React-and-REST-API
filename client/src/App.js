@@ -2,8 +2,9 @@ import React from 'react';
 //router
 import { BrowserRouter, Route } from 'react-router-dom'
 //components
-import Courses from './components/Courses'
 import Header from './components/Header'
+import Courses from './components/Courses'
+import CourseDetail from './components/CourseDetail'
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       <div>
         <Route component={Header}/>
         <Route exact path="/" component={Courses}/>
+        <Route path="/courses/:id" component={CourseDetail}/>
       </div>
     </BrowserRouter>
   )

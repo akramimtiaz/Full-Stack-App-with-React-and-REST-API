@@ -4,7 +4,7 @@ body {
 }
 
 /*Generic*/
-.header, .courses {
+.header, .courses, .courseDetail {
   margin: 0 auto;
   display: flex;
   flex-direction: row;
@@ -43,12 +43,13 @@ body {
 }
 .courses {
   width: 90%;
-  justify-content: space-evenly;
+  justify-content: flex-start;
 }
 .courses--courseItem {
   display: inline-block;
   min-width: 25%;
   margin-top: 20px;
+  margin-right: 15px;
   padding-left: 20px;
   padding-right: 20px;
   border-radius: 10px;
@@ -73,8 +74,56 @@ body {
   text-decoration: none;
 }
 .courses--addCourse--title {
+  font-size: 1.2em;
   color: #999999;
 }
+/*Course Detail*/
+.courseDetail--wrapper {
+  width: 100%;
+}
+.courseDetail {
+  width: 90%;
+  margin-top: 30px;
+  justify-content: space-evenly;
+}
+.courseDetail h3, .courseDetail h4 {
+  margin: 0;
+  padding: 0;
+}
+.courseDetail--left, .courseDetail--right {
+  display: flex;
+  flex-direction: column;
+}
+.courseDetail--left {
+  width: 60%;
+}
+.courseDetail--right {
+  width: 30%;
+}
 
+.courseDetail--left h3 {
+  font-family: 'Work Sans', serif;
+  font-size: 2em;
+} 
+.courseDetail--left h4, .courseDetail--left--author {
+  font-size: 1em;
+  color: #999;
+  margin-bottom: 7px;
+} 
+.courseDetail--right h4 {
+  text-transform: uppercase;
+  font-family: 'Cousine';
+  font-size: 1.1em;
+  font-weight: 100;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #999;
+  color: #999;
+}
+
+.courseDetail--right h3 {
+  margin: 20px 0 20px 0;
+}
 
 
