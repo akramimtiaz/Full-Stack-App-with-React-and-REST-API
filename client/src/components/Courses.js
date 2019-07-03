@@ -44,13 +44,13 @@ class Courses extends Component {
         let courseItems
 
         if(courses.length > 0){
-            courseItems = courses.map(course => <CourseItem key={course.id} title={course.title}/>)
+            courseItems = courses.map(course => <CourseItem key={course.id} {...course}/>)
         }else{
             courseItems = <h3>No Courses Exist</h3>
         }   
         
         return (
-            <div className="wrapper">
+            <div className="courses--wrapper">
                 <div className="courses">
                     {
                         isLoading ? 

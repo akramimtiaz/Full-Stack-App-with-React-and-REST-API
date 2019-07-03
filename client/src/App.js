@@ -3,11 +3,13 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 //components
 import Courses from './components/Courses'
+import Header from './components/Header'
 
 const App = () => {
   return (
     <BrowserRouter>
       <div>
+        <Route component={Header}/>
         <Route exact path="/" component={Courses}/>
       </div>
     </BrowserRouter>
