@@ -12,6 +12,7 @@ import axios from 'axios'
 import { AuthContext } from './context'
 //components
 import CourseItem from './misc/CourseItem'
+import AddCourse from './misc/AddCourse'
 
 class Courses extends Component {
     constructor() {
@@ -54,8 +55,9 @@ class Courses extends Component {
                 <div className="courses">
                     {
                         isLoading ? 
-                            <h3>Loading</h3> : courseItems
+                            <h3>Loading...</h3> : courseItems
                     }
+                    <AddCourse/>
                 </div>
             </div>   
         )
