@@ -26,11 +26,7 @@ class Courses extends Component {
     componentDidMount() {
         this.setState({ isLoading: true })
 
-        axios({
-            url: 'http://localhost:5000/api/courses',
-            method: 'get',
-            responseType: 'json',
-        })
+        axios.get('http://localhost:5000/api/courses')
         .then(response => {
             if(response.status === 200){
                 this.setState({

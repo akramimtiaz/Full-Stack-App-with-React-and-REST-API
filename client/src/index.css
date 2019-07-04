@@ -151,5 +151,88 @@ body {
   color: #7c689b;
   border: 1px solid #7c689b;
 }
+/*Course Create Form*/
+.createCourse--wrapper {
+  width: 95%;
+  margin: 0 auto;
+}
+.createCourse {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.createCourse h2 {
+  font-size: 2em;
+}
+.createCourse ul.errors {
+  background: rgba(255,0,0, 0.5);
+  list-style-type: none;
+  width: 100%;
+}
+.createCourse--left {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+.createCourse--left p:first-child {
+  margin-top: 0px;
+}
+.createCourse--left #title {
+  font-family: 'Work Sans';
+  font-weight: bold;
+  font-size: 2.5em;
+  width: 90%;
+  padding: 8px;
+  border: 1px solid #999;
+  border-radius: 8px;
+}
+.createCourse--left #description {
+  font-family: 'Cousine', sans-serif;
+  font-size: .95em;
+  padding: 8px;
+  width: 90%;
+  height: 300px;
+  border: 1px solid #999;
+  border-radius: 8px;
+  resize: inherit;
+}
+.createCourse--right {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  font-family: 'Cousine', sans-serif;
+  text-transform: uppercase;
+}
+.createCourse--right textarea {
+  margin: 15px 0 10px 0;
+  width: 100%;
+  border: 1px solid #999;
+  border-radius: 8px;
+  resize: inherit;
+}
+.createCourse--right #estimatedTime {
+  padding: 15px 0 0 10px;
+  font-size: 1em;
+  height: 40%;
+}
+.createCourse--right #materialsNeeded {
+  padding: 15px 0 0 10px;
+  height: 324px;
+}
+.createCourse--button {
+  font-family: 'Work Sans';
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #7c689b;
+  background: white;
+  float: left;
+  margin-right: 20px;
+  padding: 20px 60px 20px 60px;
+  border: 3px solid #7c689b;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 
 
