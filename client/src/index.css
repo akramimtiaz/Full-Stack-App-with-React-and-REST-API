@@ -233,6 +233,71 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
+/*Sign In form*/
+.signInForm--wrapper {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+.signInForm {
+  width: 30%;
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.signInForm--form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.signInForm--form input {
+  font-family: 'Work Sans';
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  padding: 5px;
+  border: 1px solid #999;
+  border-radius: 7px;
+}
+.signInForm h2 {
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+}
 
-
+.signInForm--button--submit {
+  height: 30px;
+  padding: 5px;
+  border: none;
+  border-radius: 7px;
+  background: #7c689b;
+  color: white;
+  font-family: 'Work Sans';
+  font-size: 1.1em;
+}
+.signInForm--button--cancel {
+  width: 100%;
+  height: 30px;
+  margin-top: 15px;
+  padding: 5px;
+  border: 1px solid #7c689b;
+  border-radius: 7px;
+  background: white;
+  color: #7c689b;
+  font-family: 'Work Sans';
+  font-size: 1.1em;
+}
+.signInForm p {
+  margin-top: 30px;
+  font-family: 'Cousine';
+  font-size: 1em;
+  font-weight: bold;
+}
+.signInForm--errors {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 10px; 
+  background: rgba(255,0,0, 0.45);
+}
 

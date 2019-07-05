@@ -6,6 +6,7 @@ import Header from './components/Header'
 import Courses from './components/Courses'
 import CourseDetail from './components/CourseDetail'
 import CreateCourse from './components/CreateCourse'
+import UserSignIn from './components/UserSignIn'
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route exact path="/" component={Courses}/>
           <Route exact path="/courses/create" component={CreateCourse}/>
           <Route path="/courses/:id" component={CourseDetail}/>
+          <Route path="/signin" component={UserSignIn} />
         </Switch>
       </div>
     </BrowserRouter>
