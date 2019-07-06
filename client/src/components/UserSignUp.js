@@ -33,7 +33,7 @@ class UserSignUp extends Component {
         })
     }
 
-    handleClick = (e) => {
+    handleCancel = (e) => {
         this.props.history.push("/")
     }
 
@@ -67,7 +67,7 @@ class UserSignUp extends Component {
 
 
     render(){
-        const { errors } = this.state
+        const { firstName, lastName, emailAddress, password, errors } = this.state
         return (
             <div className="signUpForm--wrapper">
                 <div className="signUpForm">
@@ -79,16 +79,20 @@ class UserSignUp extends Component {
                     }
                     <form className="signUpForm--form" onSubmit={this.handleSubmit}>
                         <input type="text" className="signUpForm--input" name="firstName" id="firstName" placeholder="First Name"
-                            value={this.state.x} onChange={this.handleChange} />
+                            value={firstName} onChange={this.handleChange} />
+
                         <input type="text" className="signUpForm--input" name="lastName" id="lastName" placeholder="Last Name"
-                            value={this.state.x} onChange={this.handleChange} />
+                            value={lastName} onChange={this.handleChange} />
+
                         <input type="text" className="signUpForm--input" name="emailAddress" id="emailAddress" placeholder="Email Address"
-                            value={this.state.x} onChange={this.handleChange} />
-                        <input type="text" className="signUpForm--input" name="password" id="password" placeholder="Password"
-                            value={this.state.x} onChange={this.handleChange} />
+                            value={emailAddress} onChange={this.handleChange} />
+
+                        <input type="password" className="signUpForm--input" name="password" id="password" placeholder="Password"
+                            value={password} onChange={this.handleChange} />
+                            
                         <button className="signUpForm--button--submit" type="submit">Sign Up</button>
                     </form>
-                    <button className="signUpForm--button--cancel" onClick={this.handleClick}>Cancel</button>
+                    <button className="signUpForm--button--cancel" onClick={this.handleCancel}>Cancel</button>
                     <p>Already have a user account? <Link to="/signin">Click here</Link> to sign in!</p>
                 </div>
             </div>

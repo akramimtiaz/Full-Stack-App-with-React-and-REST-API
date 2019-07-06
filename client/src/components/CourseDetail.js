@@ -46,7 +46,7 @@ class CourseDetail extends Component {
         .catch(error => {
             console.log(error)
             this.props.history.push('/notfound'); 
-        }) 
+        })
     }
 
     render(){ 

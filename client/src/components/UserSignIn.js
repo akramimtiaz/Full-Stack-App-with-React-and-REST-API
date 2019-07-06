@@ -52,7 +52,7 @@ class UserSignIn extends Component {
     }
 
     render(){
-        const { errors } = this.state
+        const { emailAddress, password, errors } = this.state
         return (
             <div className="signInForm--wrapper">
                 <div className="signInForm">   
@@ -60,9 +60,9 @@ class UserSignIn extends Component {
                     { errors ? <div className="signInForm--errors">{errors}</div> : null }
                     <form className="signInForm--form" onSubmit={this.handleSubmit}>
                         <input type="text" id="emailAddress" name="emailAddress" placeholder="Email Address" className="signInForm--emailAddress"
-                            value={this.state.emailAddress} onChange={this.handleChange} />                  
+                            value={emailAddress} onChange={this.handleChange} />                  
                         <input type="password" id="password" name="password" placeholder="Password" className="signInForm--password"
-                            value={this.state.password} onChange={this.handleChange} />
+                            value={password} onChange={this.handleChange} />
                         <button type="submit" name="submit" className="signInForm--button--submit">Sign In</button>
                     </form>
                     <button name="cancel" className="signInForm--button--cancel" onClick={this.handleClick}>Cancel</button>

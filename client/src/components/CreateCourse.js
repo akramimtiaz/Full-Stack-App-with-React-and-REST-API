@@ -74,10 +74,13 @@ class CreateCourse extends Component {
                         <div className="createCourse">
                             <div className="createCourse--left">
                                 <p>Course</p>
-                                <input type="text" id="title" name="title" placeholder="Course title..." value={title} onChange={this.handleChange}/>
+                                <input type="text" id="title" name="title" placeholder="Course title..." 
+                                    value={title} onChange={this.handleChange}/>
+
                                 <p>By {isAuth ? authUser.firstName : 'N/A'}</p>
+
                                 <textarea type="text" id="description" name="description" placeholder="Course description..." 
-                                value={description} onChange={this.handleChange}></textarea>
+                                    value={description} onChange={this.handleChange}></textarea>
                             </div>
                             <div className="createCourse--right">
                                 <div>Estimated Time<br/>

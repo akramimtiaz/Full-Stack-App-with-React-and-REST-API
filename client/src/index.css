@@ -152,32 +152,32 @@ body {
   border: 1px solid #7c689b;
 }
 /*Course Create Form*/
-.createCourse--wrapper {
+.createCourse--wrapper, .updateCourse--wrapper {
   width: 95%;
   margin: 0 auto;
 }
-.createCourse {
+.createCourse, .updateCourse {
   margin-bottom: 20px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
 }
-.createCourse h2 {
+.createCourse h2, .updateCourse h2 {
   font-size: 2em;
 }
-.createCourse ul.errors {
+.createCourse ul.errors, .updateCourse ul.errors {
   list-style-type: none;
   width: 100%;
 }
-.createCourse--left {
+.createCourse--left, .updateCourse--left {
   width: 70%;
   display: flex;
   flex-direction: column;
 }
-.createCourse--left p:first-child {
+.createCourse--left p:first-child, .updateCourse--left p:first-child {
   margin-top: 0px;
 }
-.createCourse--left #title {
+.createCourse--left #title, .updateCourse--left #title {
   font-family: 'Work Sans';
   font-weight: bold;
   font-size: 2.5em;
@@ -186,7 +186,7 @@ body {
   border: 1px solid #999;
   border-radius: 8px;
 }
-.createCourse--left #description {
+.createCourse--left #description, .updateCourse--left #description {
   font-family: 'Cousine', sans-serif;
   font-size: .95em;
   padding: 8px;
@@ -196,30 +196,30 @@ body {
   border-radius: 8px;
   resize: inherit;
 }
-.createCourse--right {
+.createCourse--right, .updateCourse--right {
   display: flex;
   flex-direction: column;
   width: 20%;
   font-family: 'Cousine', sans-serif;
   text-transform: uppercase;
 }
-.createCourse--right textarea {
+.createCourse--right textarea, .updateCourse--right textarea  {
   margin: 15px 0 10px 0;
   width: 100%;
   border: 1px solid #999;
   border-radius: 8px;
   resize: inherit;
 }
-.createCourse--right #estimatedTime {
+.createCourse--right #estimatedTime, .updateCourse--right #estimatedTime {
   padding: 15px 0 0 10px;
   font-size: 1em;
   height: 40%;
 }
-.createCourse--right #materialsNeeded {
+.createCourse--right #materialsNeeded, .updateCourse--right #materialsNeeded {
   padding: 15px 0 0 10px;
   height: 324px;
 }
-.createCourse--button {
+.createCourse--button, .updateCourse--button {
   font-family: 'Work Sans';
   font-weight: bold;
   font-size: 1.2em;
