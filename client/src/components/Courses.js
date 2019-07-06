@@ -7,12 +7,12 @@
  * */
 
 import React, { Component } from 'react'
-import axios from 'axios'
 //context
 import { AuthContext } from './context'
 //components
 import CourseItem from './misc/CourseItem'
 import AddCourse from './misc/AddCourse'
+import { getCourses } from './api'
 
 class Courses extends Component {
     constructor() {
@@ -26,16 +26,12 @@ class Courses extends Component {
     componentDidMount() {
         this.setState({ isLoading: true })
 
-        axios.get('http://localhost:5000/api/courses')
-        .then(response => {
-            if(response.status === 200){
-                this.setState({
-                    isLoading: false,
-                    courses: response.data
-                })
-            }
-        })
-        .catch(error => console.log(error))
+        getCourses()
+        .then(data => this.setState({
+            isLoading: false,
+            courses: data
+        }))
+        .catch(() => this.props.history.push("/error"))
     }
 
     render(){
