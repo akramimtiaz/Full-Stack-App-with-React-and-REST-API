@@ -10,6 +10,9 @@ import UpdateCourse from './components/UpdateCourse'
 import UserSignIn from './components/UserSignIn'
 import UserSignUp from './components/UserSignUp'
 import UserSignOut from './components/UserSignOut'
+import UnhandledError from './components/misc/UnhandledError'
+import NotFound from './components/misc/NotFound'
+import Forbidden from './components/misc/Forbidden'
 
 const App = () => {
   return (
@@ -24,6 +27,9 @@ const App = () => {
           <Route path="/signin" component={UserSignIn} />
           <Route path="/signup" component={UserSignUp} />
           <Route path="/signout" component={UserSignOut}/>
+          <Route path="/error" component={UnhandledError}/>          
+          <Route path="/forbidden" component={Forbidden}/>    
+          <Route component={NotFound}/>      
         </Switch>
       </div>
     </BrowserRouter>
