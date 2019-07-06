@@ -9,7 +9,7 @@ import React, { Component } from 'react'
 //context
 import { AuthContext } from './context'
 //validation
-import axios from 'axios';
+import { createCourse } from './api'
 
 class CreateCourse extends Component {
     constructor() {
@@ -37,29 +37,25 @@ class CreateCourse extends Component {
         e.preventDefault() //prevent page refresh
         
         const { authUser } = this.context
+        const { title, description, estimatedTime, materialsNeeded } = this.state
+
         const newCourse = {
-            title: this.state.title,
-            description: this.state.description,
-            estimatedTime: this.state.estimatedTime,
-            materialsNeeded: this.state.materialsNeeded,
+            title,
+            description,
+            estimatedTime,
+            materialsNeeded,
             userId: authUser.id, 
         }
         
-        axios.post('http://localhost:5000/api/courses', newCourse, {
-            auth: {
-                username: authUser.emailAddress,
-                password: authUser.password,
-            },
-            validateStatus: (status) => status === 201 || status === 400,
-        })
-        .then(response => {
-            if(response.status === 201){
-                this.props.history.push("/")
-            } else if (response.status === 400) { //either invalid/missing info
-                this.setState({ errors: response.data.errors })
+        createCourse(newCourse, authUser)
+        .then(() => this.props.history.push("/")) // Course Successfully Created, Redirect To Index
+        .catch(error => {
+            if(error.status === 400){
+                this.setState({ errors: error.data.errors })
+            } else { // 500 - Internal Server Error 
+                this.props.history.push("/error")
             }
         })
-        .catch(error => console.log(error))
     }
 
 

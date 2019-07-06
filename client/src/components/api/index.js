@@ -41,3 +41,30 @@ export const getCourse = (id) => {
         })
     })
 }
+
+export const createCourse = (course, user) => {
+    return new Promise((resolve, reject) => {
+        axios({
+            url: 'http://localhost:5000/api/courses',
+            method: 'post',
+            data: course,
+            responseType: 'json',
+            auth: {
+                username: user.emailAddress,
+                password: user.password,
+            },
+            validateStatus: status => status === 201 || status === 400 || status === 500,
+        })
+        .then(response => {
+            if(response.status === 201){
+                resolve(response)
+            } else { // 400 - Bad Request OR 500 - Internal Server Error
+                reject(response)
+            }
+        })
+        .catch(error => {
+            console.error(error)
+            reject(error)
+        })
+    })
+}
