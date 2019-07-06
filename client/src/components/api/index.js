@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+//GET All Courses 
 export const getCourses = () => {
     return new Promise((resolve, reject) => {
         axios({
@@ -20,6 +21,7 @@ export const getCourses = () => {
     })
 }
 
+//GET Course that Matches ID
 export const getCourse = (id) => {
     return new Promise((resolve, reject) => {
         axios({
@@ -42,6 +44,7 @@ export const getCourse = (id) => {
     })
 }
 
+//POST Create a New Course
 export const createCourse = (course, user) => {
     return new Promise((resolve, reject) => {
         axios({
@@ -69,6 +72,7 @@ export const createCourse = (course, user) => {
     })
 }
 
+//PUT Update an Existing Course
 export const updateCourse = (id, course, user) => {
     return new Promise((resolve, reject) => {
         axios({
@@ -96,7 +100,7 @@ export const updateCourse = (id, course, user) => {
     })
 }
 
-
+//GET User with Matching Credentials
 export const getUser = (email, password) => {
     return new Promise((resolve, reject) => {
         axios({
@@ -123,6 +127,7 @@ export const getUser = (email, password) => {
     })
 }
 
+//POST Create a New User
 export const createUser = (user) => {
     return new Promise((resolve, reject) => {
         axios({
