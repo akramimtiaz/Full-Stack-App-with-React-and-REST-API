@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import { deleteCourse } from '../api'
 //context
 import { AuthContext } from '../context'
 
@@ -7,20 +7,29 @@ class ActionBar extends Component {
     
     delete = (id) => {
         const { authUser } = this.context
-        axios({
-            url: `http://localhost:5000/api/courses/${id}`,
-            method: 'delete',
-            auth: {
-                username: authUser.emailAddress,
-                password: authUser.password,
-            },
-        })
-        .then(response => {
-            if(response.status === 204){
-                this.props.history.push("/") //NEEDS TO BE CHANGED
+        // axios({
+        //     url: `http://localhost:5000/api/courses/${id}`,
+        //     method: 'delete',
+        //     auth: {
+        //         username: authUser.emailAddress,
+        //         password: authUser.password,
+        //     },
+        // })
+        // .then(response => {
+        //     if(response.status === 204){
+        //         this.props.history.push("/") //NEEDS TO BE CHANGED
+        //     }
+        // })
+        // .catch(error => console.log(error))
+        deleteCourse(id, authUser)
+        .then(() => this.props.history.push("/"))
+        .catch(error => {
+            if(error === 403){ // 403 - Authenticated User Does NOT Own The Course TF Access Forbidden
+                this.props.history.push("/forbidden")
+            } else { // 500 - Internal Server Error
+                this.props.history.push("/error")
             }
         })
-        .catch(error => console.log(error))
     }
     
     handleClick = (e) => {

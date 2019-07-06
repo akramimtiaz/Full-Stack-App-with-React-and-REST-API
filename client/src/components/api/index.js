@@ -100,6 +100,33 @@ export const updateCourse = (id, course, user) => {
     })
 }
 
+//DELETE Course with Matching ID
+export const deleteCourse = (id, user) => {
+    return new Promise((resolve, reject) => {
+        axios({
+            url: `http://localhost:5000/api/courses/${id}`,
+            method: 'delete',
+            responseType: 'json',
+            auth: {
+                username: user.emailAddress,
+                password: user.password,
+            },
+            validateStatus: status => status === 204 || status >= 400,
+        })
+        .then(response => {
+            if(response.status === 204){
+                resolve(true)
+            } else {
+                reject(response.status)
+            }
+        })
+        .catch(error => {
+            console.error(error)
+            reject(error)
+        })
+    })
+}
+
 //GET User with Matching Credentials
 export const getUser = (email, password) => {
     return new Promise((resolve, reject) => {
