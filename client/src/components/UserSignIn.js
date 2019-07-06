@@ -43,7 +43,13 @@ class UserSignIn extends Component {
             
             actions.signIn(emailAddress, password)
             .then(() => this.props.history.push("/"))
-            .catch(() => this.setState({ errors: 'User Not Found' }))
+            .catch((error) => {
+                if(error === 401){ // 401 - Authentication Failed
+                    this.setState({ errors: 'User Not Found' })
+                } else { // 500 - Internal Server Error
+                    this.props.history.push("/error")
+                }
+            })
 
 
         } else {

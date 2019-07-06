@@ -8,9 +8,10 @@
  * STATEFUL COMPONENT
  */
 import React, { Component } from 'react'
-import axios from 'axios'
 //context
 import { AuthContext } from './context';
+//api requests
+import { getCourse, updateCourse } from './api'
 
 class UpdateCourse extends Component {
     constructor() {
@@ -25,36 +26,33 @@ class UpdateCourse extends Component {
     }
 
     componentDidMount() {
-       const courseId = this.props.match.params.id
+       const id = this.props.match.params.id
        const { authUser, isAuth } = this.context
 
-       if(isAuth) { //reset to TRUE
-            axios.get(`http://localhost:5000/api/courses/${courseId}`, {
-                validateStatus: status => status === 200 || status === 404
-            })
-            .then(response => {
-                if(response.status === 200){ //course was found
-                    const course  = response.data
-                    if(authUser.id === course.User.id){ //the currently signed in user owns the course 
-                        this.setState({
-                            title: course.title,
-                            description: course.description,
-                            estimatedTime: course.estimatedTime,
-                            materialsNeeded: course.materialsNeeded,
-                        })
-                    } else { //they are attempting to update a course they don't own
-                        this.props.history.push("/forbidden")
-                    }
-                } else if (response.status === 404){ //course was not found
-                    this.props.history.push("/notfound")
-                    throw response.data
+       if(isAuth) {
+            getCourse(id)
+            .then(course => {
+                if(course.User.id === authUser.id){
+                    this.setState({
+                        title: course.title,
+                        description: course.description,
+                        estimatedTime: course.estimatedTime,
+                        materialsNeeded: course.materialsNeeded,
+                    })
+                } else { // Authenticated User Does NOT Own The Requested Course
+                    this.props.history.push("/forbidden")
                 }
             })
-            .catch(error => console.error(error))
-       } else {
+            .catch(error => {
+                if(error === 404){
+                    this.props.history.push("/notfound")
+                } else {
+                    this.props.history.push("/error")
+                }
+            })
+       } else { // User is NOT Authenticated
            this.props.history.push("/forbidden")
        }
-       console.log(this.props.match.params.id)
     }
 
     handleCancel = (e) => {
@@ -70,35 +68,28 @@ class UpdateCourse extends Component {
     handleSubmit = (e) => {
         e.preventDefault() //prevent page reload
 
-        const courseId = this.props.match.params.id
+        const id = this.props.match.params.id
         const { authUser } = this.context
+        const { title, description, estimatedTime, materialsNeeded } = this.state
 
         const updatedCourse = {
-            id: courseId,
-            title: this.state.title,
-            description: this.state.description,
-            estimatedTime: this.state.estimatedTime,
-            materialsNeeded: this.state.materialsNeeded,
+            id,
+            title, 
+            description,
+            estimatedTime,
+            materialsNeeded,
             userId: authUser.id,
         }
 
-        axios.put(`http://localhost:5000/api/courses/${courseId}`, updatedCourse, {
-            auth: {
-                username: authUser.emailAddress,
-                password: authUser.password,
-            },
-            validateStatus: status => status === 204 || status === 400,
-            responseType: 'json',
-        })
-        .then(response => {
-            if(response.status === 204){
-                this.props.history.push(`/courses/${courseId}`)
-            } else if (response.status === 400){
-                this.setState({ errors: response.data.errors })
-                throw response.data
+        updateCourse(id, updatedCourse, authUser)
+        .then(() => this.props.history.push(`/courses/${id}`))
+        .catch(error => {
+            if(error.status === 400){ // 400 - Bad Request
+                this.setState({ errors: error.data.errors })
+            } else { // 500 - Internal Server Error
+                this.props.history.push("/error")
             }
         })
-        .catch(error => console.error(error))
     }
 
     render(){

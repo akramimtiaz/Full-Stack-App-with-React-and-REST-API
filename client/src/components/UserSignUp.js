@@ -8,7 +8,7 @@
  * STATEFUL COMPONENT
  */
 import React, { Component } from 'react'
-import axios from 'axios';
+import { createUser } from './api'
 //router
 import { Link } from 'react-router-dom'
 //context
@@ -38,31 +38,37 @@ class UserSignUp extends Component {
     }
 
     handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault() //Prevent Page Reload
 
         const { actions } = this.context
+        const { firstName, lastName, emailAddress, password } = this.state
+
         const newUser = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            emailAddress: this.state.emailAddress,
-            password: this.state.password,
+            firstName,
+            lastName,
+            emailAddress,
+            password,
         }
 
-        axios.post('http://localhost:5000/api/users', newUser, {
-            validateStatus: status => status === 201 || status === 400,
-            responseType: 'json'   
+        createUser(newUser)
+        .then(() => {
+            actions.signIn(newUser.emailAddress, newUser.password)
+            .then(() => this.props.history.push("/"))
+            .catch(error => {
+                if(error === 401){ // 401 - Authentication Failed
+                    console.error('Login Failed')
+                } else { // 500 - Internal Server Error
+                    this.props.history.push("/error")
+                }
+            })
         })
-        .then(response => {
-            if(response.status === 201){ //user was successfully created
-                actions.signIn(newUser.emailAddress, newUser.password)
-                .then(() => this.props.history.push('/'))
-                .catch(() => console.error('sign-in failed'))
-            } else if (response.status === 400) { //bad request, either due to missing/invalid data
-                this.setState({ errors: response.data.errors })
-                throw response.data.errors
+        .catch(error => {
+            if(error.status === 400){ // 400 - Bad Request
+                this.setState({ errors: error.data.errors })
+            } else { // 500 - Internal Server Error
+                this.props.history.push("/error")
             }
         })
-        .catch(error => console.error(error))
     }
 
 
