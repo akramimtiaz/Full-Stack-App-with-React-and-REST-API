@@ -40,7 +40,6 @@ class CourseDetail extends Component {
                     isLoading: false,
                     course: response.data,
                 })
-                console.log(response.data) //remove
             }
         })
         .catch(error => {
