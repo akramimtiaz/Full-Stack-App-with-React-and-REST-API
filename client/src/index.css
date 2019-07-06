@@ -165,7 +165,7 @@ body {
 .createCourse h2 {
   font-size: 2em;
 }
-.createCourse ul.errors, .signUpForm--errors {
+.createCourse ul.errors {
   list-style-type: none;
   width: 100%;
 }
@@ -300,5 +300,8 @@ body {
   background: rgba(255,0,0, 0.45);
 }
 /*Sign Up Form*/
-
+.signUpForm--errors {
+  list-style-type: none;
+  text-align: left;
+}
 
