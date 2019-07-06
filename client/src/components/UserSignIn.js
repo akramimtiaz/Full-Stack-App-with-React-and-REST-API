@@ -6,7 +6,6 @@
  * STATEFUL COMPONENT
  */
 import React, { Component } from 'react'
-import axios from 'axios'
 //router
 import { Link } from 'react-router-dom'
 //context
@@ -37,28 +36,16 @@ class UserSignIn extends Component {
         e.preventDefault() //prevent page reload
 
         const { emailAddress, password } = this.state
+        const { actions } = this.context 
+
         if(emailAddress && password){
             this.setState({ errors: null })
-            axios({
-                url: 'http://localhost:5000/api/users',
-                method: 'get',
-                auth: {
-                    username: emailAddress,
-                    password: password,
-                },
-                validateStatus: (status) => status === 200 || status === 401,
-                responseType: 'json',
-            })
-            .then(response => {
-                if(response.status === 200){ //sign-in successful
-                    this.context.actions.signIn(response.data, password) //persist user data to global state (context)
-                } else if (response.status === 401){
-                    this.setState({ errors: 'User not Found'})
-                    throw new Error('Sign-in Failed')
-                }
-            })
-            .then(() => this.props.history.push("/")) //if sign-in was successful redirect to home-page
-            .catch(error => console.error(error))
+            
+            actions.signIn(emailAddress, password)
+            .then(() => this.props.history.push("/"))
+            .catch(() => this.setState({ errors: 'User Not Found' }))
+
+
         } else {
             this.setState({ errors: 'Email Address and Password are Required' }) //if either the password or email fields are empty
         }

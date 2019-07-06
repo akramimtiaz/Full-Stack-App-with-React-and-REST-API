@@ -7,6 +7,7 @@ import Courses from './components/Courses'
 import CourseDetail from './components/CourseDetail'
 import CreateCourse from './components/CreateCourse'
 import UserSignIn from './components/UserSignIn'
+import UserSignOut from './components/UserSignOut'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route exact path="/courses/create" component={CreateCourse}/>
           <Route path="/courses/:id" component={CourseDetail}/>
           <Route path="/signin" component={UserSignIn} />
+          <Route path="/signout" component={UserSignOut}/>
         </Switch>
       </div>
     </BrowserRouter>
