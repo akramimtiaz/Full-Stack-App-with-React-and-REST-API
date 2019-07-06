@@ -9,7 +9,7 @@
  */
 
 import React, { Component } from 'react'
-import axios from 'axios'
+import { getCourse } from './api'
 //context
 import { AuthContext } from './context'
 //components
@@ -26,25 +26,22 @@ class CourseDetail extends Component {
     }
 
     componentDidMount() {
-        const courseId = this.props.match.params.id
+        const id = this.props.match.params.id
         this.setState({ isLoading: true })
 
-        axios({
-            url: `http://localhost:5000/api/courses/${courseId}`,
-            method: 'get',
-            responseType: 'json',
+        getCourse(id)
+        .then(data => {
+            this.setState({
+                isLoading: false,
+                course: data,
+            })
         })
-        .then(response => {
-            if(response.status === 200){ //request successful
-                this.setState({
-                    isLoading: false,
-                    course: response.data,
-                })
+        .catch(error => { // 404 - Course with Provided ID not Found
+            if(error === 404){
+                this.props.history.push("/notfound")
+            } else { // 500 - Server Error
+                this.props.history.push("/error")
             }
-        })
-        .catch(error => {
-            console.log(error)
-            this.props.history.push('/notfound'); 
         })
     }
 
