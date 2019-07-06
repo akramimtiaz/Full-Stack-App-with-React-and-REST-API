@@ -13,21 +13,22 @@ import UserSignOut from './components/UserSignOut'
 import UnhandledError from './components/misc/UnhandledError'
 import NotFound from './components/misc/NotFound'
 import Forbidden from './components/misc/Forbidden'
-import PrivateRoute from './components/misc/PrivateRoute'
+// import PrivateRoute from './components/misc/PrivateRoute'
 
 const App = () => {
+  localStorage.setItem('rememberMe', true);
   return (
     <BrowserRouter>
       <div>
         <Route component={Header}/>
         <Switch>
           <Route exact path="/" component={Courses}/>
-          <PrivateRoute exact path="/courses/create" component={CreateCourse}/>
-          <PrivateRoute exact path="/courses/:id/update" component={UpdateCourse}/>
+          <Route exact path="/courses/create" component={CreateCourse}/>
+          <Route exact path="/courses/:id/update" component={UpdateCourse}/>
           <Route path="/courses/:id" component={CourseDetail}/>
           <Route path="/signin" component={UserSignIn} />
           <Route path="/signup" component={UserSignUp} />
-          <PrivateRoute path="/signout" component={UserSignOut}/>
+          <Route path="/signout" component={UserSignOut}/>
           <Route path="/error" component={UnhandledError}/>          
           <Route path="/forbidden" component={Forbidden}/>    
           <Route component={NotFound}/>      
