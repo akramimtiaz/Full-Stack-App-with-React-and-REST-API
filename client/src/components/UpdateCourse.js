@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-//context
-import { AuthContext } from './context';
 //api requests
 import { getCourse, updateCourse } from './api'
 //components
@@ -20,7 +18,8 @@ class UpdateCourse extends Component {
 
     componentDidMount() {
        const id = this.props.match.params.id
-       const { authUser, isAuth } = this.context
+       const isAuth = localStorage.getItem('isAuth')
+       const authUser = JSON.parse(localStorage.getItem('authUser'))
 
        if(isAuth) {
             getCourse(id)
@@ -62,7 +61,7 @@ class UpdateCourse extends Component {
         e.preventDefault() //prevent page reload
 
         const id = this.props.match.params.id
-        const { authUser } = this.context
+        const authUser = JSON.parse(localStorage.getItem('authUser'))
         const { title, description, estimatedTime, materialsNeeded } = this.state
 
         const updatedCourse = {
@@ -86,9 +85,13 @@ class UpdateCourse extends Component {
     }
 
     render(){
+        const authUser = JSON.parse(localStorage.getItem('authUser'))
+        const isAuth = localStorage.getItem('isAuth')
         return (
             <CourseForm 
-                {...this.context}
+                page={'Update'}
+                authUser={authUser}
+                isAuth={isAuth}
                 {...this.state}
                 handleChange={this.handleChange}
                 handleCancel={this.handleCancel}
@@ -97,6 +100,5 @@ class UpdateCourse extends Component {
         )
     }
 }
-UpdateCourse.contextType = AuthContext
 
 export default UpdateCourse

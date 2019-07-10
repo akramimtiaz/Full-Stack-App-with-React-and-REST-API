@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 //api request
 import { getCourses } from './api'
-//context
-import { AuthContext } from './context'
 //components
 import CourseItem from './misc/CourseItem'
 import AddCourse from './misc/AddCourse'
@@ -49,6 +47,5 @@ class Courses extends Component {
         )
     }
 }
-Courses.contextType = AuthContext
 
 export default Courses

@@ -16,7 +16,6 @@ import Forbidden from './components/misc/Forbidden'
 // import PrivateRoute from './components/misc/PrivateRoute'
 
 const App = () => {
-  localStorage.setItem('rememberMe', true);
   return (
     <BrowserRouter>
       <div>

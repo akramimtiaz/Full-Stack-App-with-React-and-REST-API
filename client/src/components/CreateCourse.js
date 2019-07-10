@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-//context
-import { AuthContext } from './context'
 //api request
 import { createCourse } from './api'
 //components
@@ -31,7 +29,7 @@ class CreateCourse extends Component {
     handleSubmit = (e) => {
         e.preventDefault() //prevent page refresh
         
-        const { authUser } = this.context
+        const authUser = JSON.parse(localStorage.getItem('authUser'))
         const { title, description, estimatedTime, materialsNeeded } = this.state
 
         const newCourse = {
@@ -55,9 +53,13 @@ class CreateCourse extends Component {
 
 
     render(){
+        const isAuth = localStorage.getItem('isAuth')
+        const authUser = JSON.parse(localStorage.getItem('authUser'))
         return (
             <CourseForm 
-                {...this.context}
+                page={'Create'}
+                isAuth={isAuth}
+                authUser={authUser}
                 {...this.state}
                 handleChange={this.handleChange}
                 handleCancel={this.handleCancel}
@@ -66,6 +68,6 @@ class CreateCourse extends Component {
         )
     }
 }
-CreateCourse.contextType = AuthContext
+
 
 export default CreateCourse

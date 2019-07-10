@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 //api request
 import { getCourse } from './api'
-//context
-import { AuthContext } from './context'
 //components
 import ActionBar from './misc/ActionBar'
 import CourseDetailHeader from './misc/CourseDetailHeader'
 import CourseDetailStats from './misc/CourseDetailStats'
 
 class CourseDetail extends Component {
-
     constructor() {
         super()
         this.state = {
@@ -63,6 +60,5 @@ class CourseDetail extends Component {
         )
     }
 }
-CourseDetail.contextType = AuthContext
 
 export default CourseDetail

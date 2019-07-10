@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { deleteCourse } from '../api'
-//context
-import { AuthContext } from '../context'
 
 class ActionBar extends Component {
     
     delete = (id) => {
-        const { authUser } = this.context
+        const authUser = JSON.parse(localStorage.getItem('authUser'))    
         
         deleteCourse(id, authUser)
         .then(() => this.props.history.push("/")) //Deletion was Successful, Return to Course List
@@ -34,13 +32,15 @@ class ActionBar extends Component {
 
     render() {
         const courseOwnerId = parseInt(this.props.courseOwnerId)
-        const { isAuth, authUser } = this.context
+        const isAuth = localStorage.getItem('isAuth')
+        const authUser = JSON.parse(localStorage.getItem('authUser'))
+        
         return (
             <div className="actions--bar">
                 <div className="bounds">
                     <div className="grid-100">
                         {
-                            isAuth && authUser.id === courseOwnerId ? 
+                            isAuth && authUser && authUser.id === courseOwnerId ? 
                                 <span>
                                     <button name="update" className="button" onClick={this.handleClick}>Update Course</button>
                                     <button name="delete" className="button" onClick={this.handleClick}>Delete Course</button>
@@ -55,6 +55,5 @@ class ActionBar extends Component {
         )
     }
 }
-ActionBar.contextType = AuthContext
 
 export default ActionBar

@@ -1,7 +1,7 @@
 import React from 'react'
 
 const CourseForm = ({title, description, estimatedTime, materialsNeeded, errors, 
-                    isAuth, authUser,
+                    isAuth, authUser, page,
                     handleChange, handleCancel, handleSubmit}) => {
     return (
         <div className="bounds course--detail">
@@ -59,7 +59,7 @@ const CourseForm = ({title, description, estimatedTime, materialsNeeded, errors,
                     </div>
                 </div>
                 <div className="grid-100 pad-bottom">
-                    <button className="button" type="submit">Create Course</button>
+                    <button className="button" type="submit">{page} Course</button>
                     <button className="button button-secondary" name="cancel" onClick={handleCancel}>Cancel</button>
                 </div>
             </form>
