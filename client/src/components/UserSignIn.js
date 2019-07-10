@@ -30,12 +30,13 @@ class UserSignIn extends Component {
 
         const { emailAddress, password } = this.state
         const { actions } = this.context 
+        const { from } = this.props.location.state || { from: { pathname: '/' } }
 
         if(emailAddress && password){
             this.setState({ errors: null })
             
             actions.signIn(emailAddress, password)
-            .then(() => this.props.history.push("/"))
+            .then(() => this.props.history.push(from))
             .catch((error) => {
                 if(error === 401){ // 401 - Authentication Failed
                     this.setState({ errors: 'User Not Found' })

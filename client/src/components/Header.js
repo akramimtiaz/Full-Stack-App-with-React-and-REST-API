@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 const Header = () => {
     const isAuth = localStorage.getItem('isAuth')
     const authUser = JSON.parse(localStorage.getItem('authUser'))
-    console.log(isAuth, authUser)
     return (
         <div className="header">
             <div className="bounds">

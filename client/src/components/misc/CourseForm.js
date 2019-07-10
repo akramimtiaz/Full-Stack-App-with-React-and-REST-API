@@ -29,7 +29,7 @@ const CourseForm = ({title, description, estimatedTime, materialsNeeded, errors,
                             <input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..."
                                 value={title} onChange={handleChange} />
                         </div>
-                        <p>By {isAuth ? authUser.firstName : 'N/A'}</p>
+                        <p>By {isAuth && authUser ? authUser.firstName : 'N/A'}</p>
                     </div>
                     <div className="course--description">
                         <div>

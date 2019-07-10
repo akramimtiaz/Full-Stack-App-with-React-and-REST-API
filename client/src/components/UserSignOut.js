@@ -1,21 +1,14 @@
 import React, { useContext } from 'react'
 //context
-import { Consumer, AuthContext } from './context'
+import { AuthContext } from './context'
 //router
 import { Redirect } from 'react-router-dom'
 
 const UserSignOut = () => {
-    const auth = useContext(AuthContext)
-    console.log(auth)
+    const context = useContext(AuthContext)
+    context.actions.signOut()
     return (
-        <Consumer>
-            {
-                context => {
-                    context.actions.signOut()
-                    return (<Redirect to="/" />)
-                }
-            }
-        </Consumer>
+        <Redirect to="/"/>
     )
 }
 
