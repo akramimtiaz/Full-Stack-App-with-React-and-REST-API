@@ -21,7 +21,7 @@ class UserSignIn extends Component {
         })
     }
 
-    handleClick = (e) => { //this function is used by the cancel button
+    handleCancel = (e) => { //this function is used by the cancel button
         this.props.history.push("/")
     }
 
@@ -43,8 +43,6 @@ class UserSignIn extends Component {
                     this.props.history.push("/error")
                 }
             })
-
-
         } else {
             this.setState({ errors: 'Email Address and Password are Required' }) //if either the password or email fields are empty
         }
@@ -53,18 +51,28 @@ class UserSignIn extends Component {
     render(){
         const { emailAddress, password, errors } = this.state
         return (
-            <div className="signInForm--wrapper">
-                <div className="signInForm">   
-                    <h2>Sign In</h2>
+            <div className="bounds">
+                <div className="grid-33 centered signin">
+                    <h1>Sign In</h1>
                     { errors ? <div className="signInForm--errors">{errors}</div> : null }
-                    <form className="signInForm--form" onSubmit={this.handleSubmit}>
-                        <input type="text" id="emailAddress" name="emailAddress" placeholder="Email Address" className="signInForm--emailAddress"
-                            value={emailAddress} onChange={this.handleChange} />                  
-                        <input type="password" id="password" name="password" placeholder="Password" className="signInForm--password"
-                            value={password} onChange={this.handleChange} />
-                        <button type="submit" name="submit" className="signInForm--button--submit">Sign In</button>
-                    </form>
-                    <button name="cancel" className="signInForm--button--cancel" onClick={this.handleClick}>Cancel</button>
+                    <div>
+                        <form onSubmit={this.handleSubmit}>
+                            <div>
+                                <input id="emailAddress" name="emailAddress" type="text" placeholder="Email Address" 
+                                    value={emailAddress} onChange={this.handleChange} />
+                            </div>
+                            <div>
+                                <input id="password" name="password" type="password" placeholder="Password"
+                                    value={password} onChange={this.handleChange} />
+                            </div>
+                            <div className="grid-100 pad-bottom">
+                                <button className="button" type="submit">Sign In</button>
+                                <button className="button button-secondary" onClick={this.handleCancel}>Cancel</button>
+                            </div>
+                        </form>
+                        
+                    </div>
+                    <p>&nbsp;</p>
                     <p>Don't have a user account? <Link to="/signup">Click here</Link> to sign up!</p>
                 </div>
             </div>

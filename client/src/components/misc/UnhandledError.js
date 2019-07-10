@@ -4,12 +4,10 @@ import { Link } from 'react-router-dom'
 
 const UnhandledError = () => {
     return( 
-        <div className="errorPage--wrapper">
-            <div className="errorPage">
-                <h2>Error</h2>
-                <p>Sorry! we just encountered an unexpected error.</p>
-                <Link to="/">Return</Link>
-            </div>
+        <div className="bounds">
+            <h1>Error</h1>
+            <p>Sorry! We just encountered an unexpected error.</p>
+            <Link to="/">Return</Link>
         </div>
     )
 }

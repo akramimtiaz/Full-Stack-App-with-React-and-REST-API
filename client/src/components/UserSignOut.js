@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 //context
-import { Consumer } from './context'
+import { Consumer, AuthContext } from './context'
 //router
 import { Redirect } from 'react-router-dom'
 
 const UserSignOut = () => {
+    const auth = useContext(AuthContext)
+    console.log(auth)
     return (
         <Consumer>
             {

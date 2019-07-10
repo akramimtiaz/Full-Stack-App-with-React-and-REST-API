@@ -5,6 +5,8 @@ import { getCourse } from './api'
 import { AuthContext } from './context'
 //components
 import ActionBar from './misc/ActionBar'
+import CourseDetailHeader from './misc/CourseDetailHeader'
+import CourseDetailStats from './misc/CourseDetailStats'
 
 class CourseDetail extends Component {
 
@@ -39,48 +41,25 @@ class CourseDetail extends Component {
     render(){ 
         const { isLoading, course } = this.state
         return (
-            <React.Fragment>
+            <div>
                 <ActionBar courseOwnerId={course ? course.User.id : null} {...this.props}/>
-                <div className="courseDetail--wrapper">
-                    <div className="courseDetail">
-                        {
-                            isLoading || course === null ? 
-                            <h3>Loading</h3>
-                            :
-                            <React.Fragment>
-                                <div className="courseDetail--left">
-                                    <div>
-                                        <h4>Course</h4>
-                                        <h3>{course.title}</h3>
-                                        <p className="courseDetail--left--author">{`By ${course.User.firstName} ${course.User.lastName}`}</p>
-                                    </div>
-                                    <div>
-                                        {course.description.split('\n').map((paragraph, index) => <p key={index}>{paragraph}</p>)}
-                                    </div>
-                                </div>
-                                <div className="courseDetail--right">
-                                    <div>
-                                        <h4>Estimated Time</h4>
-                                        <h3>
-                                        {course.estimatedTime ? course.estimatedTime : 'N/A'}
-                                        </h3>
-                                    </div>
-                                    <div>   
-                                        <h4>Materials Needed</h4>
-                                        <ul>
-                                            { course.materialsNeeded ?
-                                                course.materialsNeeded.split('\n').map((material, index) => material ? <li key={index}>{material.slice(1)}</li> : null)
-                                                :
-                                                <li>N/A</li>
-                                            }
-                                        </ul>
-                                    </div>
-                                </div>
-                            </React.Fragment>
-                        }
+                {
+                    isLoading || course === null ? 
+                    null
+                    :
+                    <div className="bounds course--detail">
+                        <CourseDetailHeader 
+                            title={course.title} 
+                            description={course.description} 
+                            user={course.User} 
+                        />
+                        <CourseDetailStats 
+                            estimatedTime={course.estimatedTime} 
+                            materialsNeeded={course.materialsNeeded}
+                        />
                     </div>
-                </div>
-            </React.Fragment>
+                }
+            </div>
         )
     }
 }

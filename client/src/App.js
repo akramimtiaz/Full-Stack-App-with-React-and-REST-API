@@ -21,6 +21,7 @@ const App = () => {
     <BrowserRouter>
       <div>
         <Route component={Header}/>
+        <hr/>
         <Switch>
           <Route exact path="/" component={Courses}/>
           <Route exact path="/courses/create" component={CreateCourse}/>

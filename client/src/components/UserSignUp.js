@@ -15,6 +15,7 @@ class UserSignUp extends Component {
             lastName: '',
             emailAddress: '',
             password: '',
+            confirmPassword: '',
             errors: null,
         }
     }
@@ -33,7 +34,7 @@ class UserSignUp extends Component {
         e.preventDefault() //Prevent Page Reload
 
         const { actions } = this.context
-        const { firstName, lastName, emailAddress, password } = this.state
+        const { firstName, lastName, emailAddress, password, confirmPassword } = this.state
 
         const newUser = {
             firstName,
@@ -42,55 +43,73 @@ class UserSignUp extends Component {
             password,
         }
 
-        createUser(newUser)
-        .then(() => {
-            actions.signIn(newUser.emailAddress, newUser.password)
-            .then(() => this.props.history.push("/"))
+        if(password === confirmPassword){
+            createUser(newUser)
+            .then(() => {
+                actions.signIn(newUser.emailAddress, newUser.password)
+                .then(() => this.props.history.push("/"))
+                .catch(error => {
+                    if(error === 401){ // 401 - Authentication Failed
+                        console.error('Login Failed')
+                    } else { // 500 - Internal Server Error
+                        this.props.history.push("/error")
+                    }
+                })
+            })
             .catch(error => {
-                if(error === 401){ // 401 - Authentication Failed
-                    console.error('Login Failed')
+                if(error.status === 400){ // 400 - Bad Request
+                    this.setState({ errors: error.data.errors })
                 } else { // 500 - Internal Server Error
                     this.props.history.push("/error")
                 }
             })
-        })
-        .catch(error => {
-            if(error.status === 400){ // 400 - Bad Request
-                this.setState({ errors: error.data.errors })
-            } else { // 500 - Internal Server Error
-                this.props.history.push("/error")
-            }
-        })
+        } else { //passwords don't match
+            this.setState({ errors: ['It appears the passwords do not match'] })
+        }
     }
 
 
     render(){
-        const { firstName, lastName, emailAddress, password, errors } = this.state
+        const { firstName, lastName, emailAddress, password, confirmPassword, errors } = this.state
         return (
-            <div className="signUpForm--wrapper">
-                <div className="signUpForm">
-                    <h2>Sign Up</h2>
-                    { errors ? 
-                        <ul className="signUpForm--errors">{errors.map((error, index) => error ? <li key={index}>{error}</li> : null)}</ul>
-                        : 
-                        null 
+            <div className="bounds">
+                <div className="grid-33 centered signin">
+                    <h1>Sign Up</h1>
+                    { 
+                        errors ? 
+                            <ul>{errors.map((error, index) => error ? <li key={index}>{error}</li> : null)}</ul>
+                            : 
+                            null 
                     }
-                    <form className="signUpForm--form" onSubmit={this.handleSubmit}>
-                        <input type="text" className="signUpForm--input" name="firstName" id="firstName" placeholder="First Name"
-                            value={firstName} onChange={this.handleChange} />
-
-                        <input type="text" className="signUpForm--input" name="lastName" id="lastName" placeholder="Last Name"
-                            value={lastName} onChange={this.handleChange} />
-
-                        <input type="text" className="signUpForm--input" name="emailAddress" id="emailAddress" placeholder="Email Address"
-                            value={emailAddress} onChange={this.handleChange} />
-
-                        <input type="password" className="signUpForm--input" name="password" id="password" placeholder="Password"
-                            value={password} onChange={this.handleChange} />
-                            
-                        <button className="signUpForm--button--submit" type="submit">Sign Up</button>
-                    </form>
-                    <button className="signUpForm--button--cancel" onClick={this.handleCancel}>Cancel</button>
+                    <div>
+                        <form onSubmit={this.handleSubmit}>
+                            <div>
+                                <input id="firstName" name="firstName" type="text" placeholder="First Name"
+                                    value={firstName} onChange={this.handleChange} />
+                            </div>
+                            <div>
+                                <input id="lastName" name="lastName" type="text" placeholder="Last Name"
+                                    value={lastName} onChange={this.handleChange} />
+                            </div>
+                            <div>
+                                <input id="emailAddress" name="emailAddress" type="text" placeholder="Email Address"
+                                    value={emailAddress} onChange={this.handleChange} />
+                            </div>
+                            <div>
+                                <input id="password" name="password" type="password" placeholder="Password"
+                                    value={password} onChange={this.handleChange} />
+                            </div>
+                            <div>
+                                <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm Password"
+                                    value={confirmPassword} onChange={this.handleChange} />
+                            </div>
+                            <div className="grid-100 pad-bottom">
+                                <button className="button" type="submit">Sign Up</button>
+                                <button className="button button-secondary" onClick={this.handleCancel}>Cancel</button>
+                            </div>
+                        </form>                       
+                    </div>
+                    <p>&nbsp;</p>
                     <p>Already have a user account? <Link to="/signin">Click here</Link> to sign in!</p>
                 </div>
             </div>

@@ -39,15 +39,13 @@ class Courses extends Component {
         }   
         
         return (
-            <div className="courses--wrapper">
-                <div className="courses">
-                    {
-                        isLoading ? 
-                            <h3>Loading...</h3> : courseItems
-                    }
-                    <AddCourse/>
-                </div>
-            </div>   
+            <div className="bounds">
+                {
+                    isLoading ? 
+                        <h3>Loading...</h3> : courseItems
+                }
+                <AddCourse/>
+            </div> 
         )
     }
 }

@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom'
 
 const CourseItem = ({id, title}) => {
     return (
-        <Link className="courses--courseItem" to={`/courses/${id}`}>
-            <h4 className="courses--courseItem--heading">Course</h4>
-            <h3 className="courses--courseItem--title">{title}</h3>
-        </Link>
+        <div className="grid-33">
+            <Link className="course--module course--link" to={`/courses/${id}`}>
+                <h4 className="course--label">Course</h4>
+                <h3 className="course--title">{title}</h3>
+            </Link>
+        </div>
     )
 }
 
