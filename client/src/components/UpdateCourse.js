@@ -25,7 +25,7 @@ class UpdateCourse extends Component {
        if(isAuth) {
             getCourse(id)
             .then(course => {
-                if(course.User.id === authUser.id){
+                if(course.User.id === authUser.id){ //Ensure Authenticated User Does Own The Requested Course
                     this.setState({
                         title: course.title,
                         description: course.description,
@@ -37,9 +37,9 @@ class UpdateCourse extends Component {
                 }
             })
             .catch(error => {
-                if(error === 404){
+                if(error === 404){ //404 - Not Found - Course was NOT found
                     this.props.history.push("/notfound")
-                } else {
+                } else { // 500 - Internal Server Error
                     this.props.history.push("/error")
                 }
             })
@@ -49,7 +49,7 @@ class UpdateCourse extends Component {
     }
 
     handleCancel = (e) => {
-        this.props.history.push("/")
+        this.props.history.push("/") //returns user to index page
     }
 
     handleChange = (e) => {
@@ -65,7 +65,7 @@ class UpdateCourse extends Component {
         const authUser = this.context.authUser
         const { title, description, estimatedTime, materialsNeeded } = this.state
 
-        const updatedCourse = {
+        const updatedCourse = { //Updated Course Details
             id,
             title, 
             description,
@@ -75,9 +75,9 @@ class UpdateCourse extends Component {
         }
 
         updateCourse(id, updatedCourse, authUser)
-        .then(() => this.props.history.push(`/courses/${id}`))
+        .then(() => this.props.history.push(`/courses/${id}`)) //Course was Successfully Updated, Redirect To Detail Page for this Course
         .catch(error => {
-            if(error.status === 400){ // 400 - Bad Request
+            if(error.status === 400){ // 400 - Bad Request - Essential Data Required in the Course Object was Missing/Invalid
                 this.setState({ errors: error.data.errors })
             } else { // 500 - Internal Server Error
                 this.props.history.push("/error")

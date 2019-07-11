@@ -5,6 +5,7 @@ import { Route, Redirect } from 'react-router-dom'
 import { Consumer } from '../context'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
+    //If the User is Authenticated, Display the Component, Else, Redirect User to Sign-In Page
     return(
         <Consumer>
         {

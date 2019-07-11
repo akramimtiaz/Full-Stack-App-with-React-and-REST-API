@@ -25,7 +25,7 @@ class CreateCourse extends Component {
     }
 
     handleCancel = (e) => {
-        this.props.history.push("/")
+        this.props.history.push("/") //returns user to index page
     }
 
     handleSubmit = (e) => {
@@ -34,7 +34,7 @@ class CreateCourse extends Component {
         const { authUser } = this.context
         const { title, description, estimatedTime, materialsNeeded } = this.state
 
-        const newCourse = {
+        const newCourse = { //Create a New Course Object
             title,
             description,
             estimatedTime,
@@ -45,7 +45,7 @@ class CreateCourse extends Component {
         createCourse(newCourse, authUser)
         .then(() => this.props.history.push("/")) // Course Successfully Created, Redirect To Index
         .catch(error => {
-            if(error.status === 400){
+            if(error.status === 400){ //400 - Bad Request - Essential Data Required in the Course Object was Missing/Invalid
                 this.setState({ errors: error.data.errors })
             } else { // 500 - Internal Server Error 
                 this.props.history.push("/error")

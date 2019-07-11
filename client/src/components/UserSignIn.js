@@ -21,8 +21,8 @@ class UserSignIn extends Component {
         })
     }
 
-    handleCancel = (e) => { //this function is used by the cancel button
-        this.props.history.push("/")
+    handleCancel = (e) => { 
+        this.props.history.push("/") //returns user to index page
     }
 
     handleSubmit = (e) => {

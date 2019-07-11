@@ -16,17 +16,17 @@ class CourseDetail extends Component {
     }
 
     componentDidMount() {
-        const id = this.props.match.params.id
+        const id = this.props.match.params.id //obtain course ID specified in URL
         this.setState({ isLoading: true })
 
         getCourse(id)
-        .then(data => {
+        .then(data => { //Matching Course was Found and Successfully Retrieved
             this.setState({
                 isLoading: false,
                 course: data,
             })
         })
-        .catch(error => { // 404 - Course with Provided ID not Found
+        .catch(error => { // 404 - Course with Provided ID was not Found
             if(error === 404){
                 this.props.history.push("/notfound")
             } else { // 500 - Server Error

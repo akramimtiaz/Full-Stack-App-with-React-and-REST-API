@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom'
 
 const UserSignOut = () => {
     const context = useContext(AuthContext)
-    context.actions.signOut()
+    context.actions.signOut() //Signout User and Redirect User to Index
     return (
         <Redirect to="/"/>
     )

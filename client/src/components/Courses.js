@@ -18,19 +18,19 @@ class Courses extends Component {
     componentDidMount() {
         this.setState({ isLoading: true })
 
-        getCourses()
-        .then(data => this.setState({
+        getCourses() 
+        .then(data => this.setState({ //Courses were Successfully Retrieved
             isLoading: false,
             courses: data
         }))
-        .catch(() => this.props.history.push("/error"))
+        .catch(() => this.props.history.push("/error")) //500 - Internal Server Error
     }
 
     render(){
         const {isLoading, courses} = this.state
         let courseItems
 
-        if(courses.length > 0){
+        if(courses.length > 0){ 
             courseItems = courses.map(course => <CourseItem key={course.id} {...course}/>)
         }else{
             courseItems = <h3>No Courses Exist</h3>

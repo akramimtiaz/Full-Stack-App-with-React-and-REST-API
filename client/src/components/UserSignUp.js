@@ -27,7 +27,7 @@ class UserSignUp extends Component {
     }
 
     handleCancel = (e) => {
-        this.props.history.push("/")
+        this.props.history.push("/") //returns user to index page
     }
 
     handleSubmit = (e) => {

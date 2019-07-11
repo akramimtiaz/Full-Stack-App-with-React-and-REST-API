@@ -9,7 +9,7 @@ class ActionBar extends Component {
         const { authUser } = this.context 
         
         deleteCourse(id, authUser)
-        .then(() => this.props.history.push("/")) //Deletion was Successful, Return to Course List
+        .then(() => this.props.history.push("/")) //Deletion was Successful, Returns User to Course List
         .catch(error => {
             if(error === 403){ // 403 - Authenticated User Does NOT Own The Course Therefore Access Is Forbidden
                 this.props.history.push("/forbidden")
@@ -23,7 +23,7 @@ class ActionBar extends Component {
         const button = e.target.name
         const courseId = this.props.match.params.id
 
-        if(button === "update"){
+        if(button === "update"){ //Determine Which Button Was Pressed
             this.props.history.push(`/courses/${courseId}/update`)
         } else if (button === "return"){
             this.props.history.push("/")
