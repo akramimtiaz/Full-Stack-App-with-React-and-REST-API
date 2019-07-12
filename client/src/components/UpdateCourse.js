@@ -49,7 +49,8 @@ class UpdateCourse extends Component {
     }
 
     handleCancel = (e) => {
-        this.props.history.push("/") //returns user to index page
+        const id = this.props.match.params.id
+        this.props.history.push(`/courses/${id}`) //returns user to course detail page
     }
 
     handleChange = (e) => {
